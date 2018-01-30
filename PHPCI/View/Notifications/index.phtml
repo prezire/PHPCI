@@ -1,6 +1,15 @@
 <div id="notification" class="index">
-  <?php $jsAassetsUrl = PHPCI_URL . 'assets/js/'; ?>
-  <script src="<?php print $jsAassetsUrl; ?>notify.js"></script>
+
+  <!-- Provides a cleaner way of passing values from HTML to JS. -->
+  <input type="hidden" class="title" value="<?php echo $title; ?>" />
+  <input type="hidden" class="body" value="<?php echo $body; ?>" />
+
+  <?php
+    $jsAassetsUrl = PHPCI_URL . 'assets/js/';
+    //https://github.com/alexgibson/notify.js
+  ?>
+
+  <script src="<?php print PHPCI_URL . 'assets/vendors/notifyjs/dist/'; ?>notify.js"></script>
   <script src="<?php print $jsAassetsUrl; ?>notifications/helper.js"></script>
   <script src="<?php print $jsAassetsUrl; ?>notifications/message.js"></script>
   <script src="<?php print $jsAassetsUrl; ?>notifications/notification.js"></script>

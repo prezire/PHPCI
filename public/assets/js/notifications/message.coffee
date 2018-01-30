@@ -1,2 +1,2 @@
-class Message
+class @Message
   constructor: (@title, @body = '') ->
