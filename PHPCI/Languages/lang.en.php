@@ -57,6 +57,7 @@ PHPCI',
     // Sidebar
     'hello_name' => 'Hello, %s',
     'dashboard' => 'Dashboard',
+    'notifications' => 'Notifications',
     'admin_options' => 'Admin Options',
     'add_project' => 'Add Project',
     'settings' => 'Settings',

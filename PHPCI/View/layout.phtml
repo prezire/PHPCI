@@ -258,7 +258,14 @@
                             <?php endforeach; ?>
                         </ul>
                     </li>
+
                 <?php endif; ?>
+
+                <li>
+                    <a href="<?php print PHPCI_URL . (array_key_exists('notification', $_GET) ? '' : 'notification'); ?>">
+                        <i class="fa fa-info"></i> <span><?php Lang::out('notifications'); ?></span>
+                    </a>
+                </li>
 
                 <li class="archive">
                     <a href="<?php print PHPCI_URL . (array_key_exists('archived', $_GET) ? '' : '?archived'); ?>">

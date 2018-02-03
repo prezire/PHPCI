@@ -1,11 +1,10 @@
-<div id="notification" class="index">
+<div id="notification" class="add">
+
+  <!-- Provides a cleaner way of passing values from HTML to JS. -->
+  <input type="hidden" class="title" value="<?php echo $title; ?>" />
+  <input type="hidden" class="body" value="<?php echo $body; ?>" />
 
   <?php
-    if(count($notifications) > 0)
-    {
-      print_r($notifications);
-    }
-    
     $jsAassetsUrl = PHPCI_URL . 'assets/js/';
     //https://github.com/alexgibson/notify.js
   ?>

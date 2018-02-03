@@ -29,9 +29,41 @@ final class NotificationController extends PHPCI\Controller
   public function index()
   {
     //Listing.
+    /*$this->view = new View('Notifications/index');
+    $this->view->title = 'Add Notfication';*/
+
+    //$this->requireAdmin();
+
+    $notifications = array();
+    $storedNotifications = $this
+      ->store
+      ->getWhere
+      (
+        array(),
+        100,
+        0,
+        array(),
+        array('title' => 'ASC')
+      );
+    print_r($storedNotifications);exit;
+
+    /*foreach ($storedNotifications['items'] as $notification) 
+    {
+      $thisGroup = array
+      (
+        'title' => $notification->getTitle(),
+        'id' => $notification->getId(),
+      );
+      $projects = Factory::getStore('Notification')
+        ->getByNotificationId($notification->getId());
+      $thisGroup['projects'] = $projects['items'];
+      $notifications[] = $thisGroup;
+    }*/
+
+    $this->view->notifications = $notifications;
   }
 
-  public function create($title, $body)
+  public function add($title, $body)
   {
     //$this->request->getMethod() === 'POST'
     //$this->getParam('title')
