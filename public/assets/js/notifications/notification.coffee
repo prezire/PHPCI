@@ -1,10 +1,12 @@
+#https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission#Example
+#TODO: Use native instead.
 class @Notification
   constructor: ->
     @checkPermissions()
 
   checkPermissions: ->
     if !Notify.needsPermission
-      @notify new Message('Test.')
+      Notification.requestPermission()
     else if Notify.isSupported()
       @notify new Message('sldkf', 'lskdfj')
       #https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API

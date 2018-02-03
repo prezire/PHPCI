@@ -190,7 +190,6 @@ class ProjectController extends PHPCI\Controller
     */
     public function add()
     {
-        print_r($this->layout);exit;
         $this->layout->title = Lang::get('add_project');
         $this->requireAdmin();
 
