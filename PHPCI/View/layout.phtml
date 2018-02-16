@@ -42,6 +42,14 @@
     <![endif]-->
 </head>
 <body class="phpci <?php print !empty($skin) ? 'skin-' . $skin : 'skin-blue'; ?>">
+
+<!-- Push Notification. -->
+<span id="notif">
+  <input type="hidden" class="host" value="ws://localhost:8080" />
+  <input type="hidden" class="topic" value="projects" />
+</span>
+<!-- /Push Notification. -->
+
 <div class="wrapper row-offcanvas row-offcanvas-left">
 
 <!-- header logo: style can be found in header.less -->
@@ -317,6 +325,10 @@
 <script src="<?php print PHPCI_URL; ?>assets/plugins/datepicker/locales/bootstrap-datepicker.<?php print Lang::getLanguage(); ?>.js" type="text/javascript"></script>
 <?php endif; ?>
 <script src="<?php print PHPCI_URL; ?>assets/js/AdminLTE/app.min.js" type="text/javascript"></script>
+
+<script src="<?php print PHPCI_URL; ?>assets/js/notifs/autobahn.js" type="text/javascript"></script>
+<script src="<?php print PHPCI_URL; ?>assets/js/notifs/ws.message.js" type="text/javascript"></script>
+<script src="<?php print PHPCI_URL; ?>assets/js/notifs/ws.notif.js" type="text/javascript"></script>
 
 </body>
 </html>

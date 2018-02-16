@@ -20,6 +20,7 @@ use PHPCI\Helper\Lang;
 use PHPCI\Helper\SshKey;
 use PHPCI\Service\BuildService;
 use PHPCI\Service\ProjectService;
+use PHPCI\Service\PushPubService;
 
 /**
 * Project Controller - Allows users to create, edit and view projects.
@@ -233,10 +234,17 @@ class ProjectController extends PHPCI\Controller
 
             $project = $this->projectService->createProject($title, $type, $reference, $options);
 
+            $this->publishNotif($title, $type, $reference, $options);
+
             $response = new b8\Http\Response\RedirectResponse();
             $response->setHeader('Location', PHPCI_URL.'project/view/' . $project->getId());
             return $response;
         }
+    }
+
+    private function publishNotif($title, $type, $reference, $options)
+    {
+        new PushPubService();
     }
 
     /**
