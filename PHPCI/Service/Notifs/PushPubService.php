@@ -20,7 +20,7 @@ final class PushPubService
     (
       'category' => $category,
       'title' => $title,
-      'article' => $article,
+      'message' => $message,
       'sentOn' => $time
     );
     $context = new ZMQContext();

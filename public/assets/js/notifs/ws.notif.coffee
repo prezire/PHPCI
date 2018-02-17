@@ -14,14 +14,20 @@ class @WsNotif
       {'skipSubprotocolCheck': true}
 
   onSub: (topic, data) ->
-    ###
-    This is where you would add 
-    the new article to the DOM 
-    (beyond the scope of this tutorial)
-    TODO: Update UI using new WsMessage().
-    ###
+    #This is where you would add the new article to the DOM 
+    #(beyond the scope of this tutorial)
+    if Notify.isSupported()
+      Notify.requestPermission @onPermGranted, @onPermDenied
+    else
+      new Notify(topic, {body: data.message}).show()
+
   onSessOpen: -> @conn.subscribe @topicUri, @onSub
+
   onSessClose: -> console.warn 'WebSocket connection closed.'
+
+  onPermGranted: -> #Do nothing.
+  
+  onPermDenied: -> #Do nothing.
+
 $(document).ready -> 
-  new Notif $('#notif .host').val(), 
-    $('#notif .topic').val()
+  new WsNotif $('#notif .host').val(), $('#notif .topic').val()

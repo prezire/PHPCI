@@ -18,6 +18,7 @@ use PHPCI\Helper\Lang;
 use PHPCI\Model\Build;
 use PHPCI\Model\Project;
 use PHPCI\Service\BuildService;
+use PHPCI\Service\PushPubService;
 
 /**
 * Build Controller - Allows users to run and view builds.
@@ -275,5 +276,10 @@ class BuildController extends \PHPCI\Controller
 
         ksort($rtn['items']);
         return $rtn;
+    }
+
+    private function publishNotif($title, $type, $reference, $options)
+    {
+        new PushPubService();
     }
 }

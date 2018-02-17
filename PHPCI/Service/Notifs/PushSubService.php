@@ -1,5 +1,5 @@
 <?php namespace PHPCI\Service\Notifs;
-use Service\PushNotifService;
+use PHPCI\Service\PushNotifService;
 use React\EventLoop\Factory;
 use React\ZMQ\Context;
 use React\Socket\Server;
@@ -25,8 +25,8 @@ final class PushSubService
    */
   public function __construct
   (
-    $uri = '127.0.0.1:8080'
-    $bindDns = 'tcp://127.0.0.1:5555',
+    $uri = '127.0.0.1:8080',
+    $bindDns = 'tcp://127.0.0.1:5555'
   )
   {
     $loop = Factory::create();
@@ -35,7 +35,7 @@ final class PushSubService
     //Listen for the web server to 
     //make a ZeroMQ push after an ajax request.
     $context = new Context($loop);
-    $pull = $context->getSocket(ZMQ::SOCKET_PULL);
+    $pull = $context->getSocket(\ZMQ::SOCKET_PULL);
     if(!is_null($bindDns) || !empty($bindDns))
     {
       $pull->bind($bindDns); 

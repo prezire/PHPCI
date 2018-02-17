@@ -1,18 +1,18 @@
-<?php namespace Service\Notifs;
+<?php namespace PHPCI\Service\Notifs;
 use Exception;
 use Ratchet\ConnectionInterface;
 use Ratchet\Wamp\WampServerInterface;
-abstract class PushService implements WampServerInterface 
+class PushService implements WampServerInterface 
 {
   protected $topics;
   public function __construct()
   {
     $this->topics = array();
   }
-  abstract public function onUnSubscribe(ConnectionInterface $conn, $topic);
-  abstract public function onOpen(ConnectionInterface $conn);
-  abstract public function onClose(ConnectionInterface $conn);
-  abstract public function onError(ConnectionInterface $conn, Exception $e);
+  public function onUnSubscribe(ConnectionInterface $conn, $topic){}
+  public function onOpen(ConnectionInterface $conn){}
+  public function onClose(ConnectionInterface $conn){}
+  public function onError(ConnectionInterface $conn, Exception $e){}
   public function onCall
   (
     ConnectionInterface $conn,

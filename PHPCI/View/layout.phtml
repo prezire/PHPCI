@@ -43,10 +43,13 @@
 </head>
 <body class="phpci <?php print !empty($skin) ? 'skin-' . $skin : 'skin-blue'; ?>">
 
-<!-- Push Notification. -->
+<!-- 
+    Push Notification. 
+    TODO: Use config.
+-->
 <span id="notif">
   <input type="hidden" class="host" value="ws://localhost:8080" />
-  <input type="hidden" class="topic" value="projects" />
+  <input type="hidden" class="topic" value="builds" />
 </span>
 <!-- /Push Notification. -->
 
@@ -326,6 +329,8 @@
 <?php endif; ?>
 <script src="<?php print PHPCI_URL; ?>assets/js/AdminLTE/app.min.js" type="text/javascript"></script>
 
+<!-- TODO: Gulp assets. -->
+<script src="<?php print PHPCI_URL; ?>assets/node_modules/notifyjs/dist/notify.js" type="text/javascript"></script>
 <script src="<?php print PHPCI_URL; ?>assets/js/notifs/autobahn.js" type="text/javascript"></script>
 <script src="<?php print PHPCI_URL; ?>assets/js/notifs/ws.message.js" type="text/javascript"></script>
 <script src="<?php print PHPCI_URL; ?>assets/js/notifs/ws.notif.js" type="text/javascript"></script>
