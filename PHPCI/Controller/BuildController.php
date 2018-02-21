@@ -280,6 +280,6 @@ class BuildController extends \PHPCI\Controller
 
     private function publishNotif($title, $type, $reference, $options)
     {
-        new PushPubService();
+        new PushPubService($title, 'This is a test.');
     }
 }

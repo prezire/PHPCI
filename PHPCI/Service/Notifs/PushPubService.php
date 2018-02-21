@@ -6,26 +6,19 @@
  */
 final class PushPubService
 {
-  public function __construct
-  (
-    $bindDns = 'tcp://127.0.0.1:5555',
-    $persistentId = 'PHPCI Notification Push Server',
-    $category,
-    $title,
-    $body,
-    $url
-  )
+  public function __construct($title, $message, $url)
   {
     $data = array
     (
-      'category' => $category,
+      'topic' => config('phpci.notifs.topic'),
       'title' => $title,
       'message' => $message,
+      'url' => $url,
       'sentOn' => $time
     );
     $context = new ZMQContext();
-    $socket = $context->getSocket(ZMQ::SOCKET_PUSH, $persistentId);
-    $socket->connect($bindDns);
+    $socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'PHPCI Notification Push Server');
+    $socket->connect(config('phpci.notifs.bindDns'));
     $socket->send(json_encode($data));
   }
 }

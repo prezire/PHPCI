@@ -2,50 +2,35 @@
 
 /*
 WebSocket Notification class.
-Refer to layout view:
-<span id="notif">
-  <input type="hidden" class="host" value="ws://localhost:8080" />
-  <input type="hidden" class="topic" value="projects" />
-</span>
+Refer to layout view.
  */
 
 (function() {
   this.WsNotif = (function() {
     function WsNotif(wsUri, topicUri) {
-      this.topicUri = topicUri;
-      this.conn = new ab.Session(wsUri, this.onSessOpen, this.onSessClose, {
+      var conn, ctx, protocol;
+      protocol = window.location.protocol === 'http:' ? 'ws:' : 'wss:';
+      wsUri = protocol + "//" + wsUri;
+      ctx = this;
+      conn = new ab.Session(wsUri, function() {
+        return conn.subscribe(topicUri, ctx.onSub);
+      }, function() {
+        return console.log('something went wrong.');
+      }, {
         'skipSubprotocolCheck': true
       });
     }
 
     WsNotif.prototype.onSub = function(topic, data) {
-      if (Notify.isSupported()) {
-        return Notify.requestPermission(this.onPermGranted, this.onPermDenied);
-      } else {
-        return new Notify(topic, {
-          body: data.message
-        }).show();
-      }
+      return console.log(topic, data);
     };
-
-    WsNotif.prototype.onSessOpen = function() {
-      return this.conn.subscribe(this.topicUri, this.onSub);
-    };
-
-    WsNotif.prototype.onSessClose = function() {
-      return console.warn('WebSocket connection closed.');
-    };
-
-    WsNotif.prototype.onPermGranted = function() {};
-
-    WsNotif.prototype.onPermDenied = function() {};
 
     return WsNotif;
 
   })();
 
   $(document).ready(function() {
-    return new WsNotif($('#notif .host').val(), $('#notif .topic').val());
+    return new WsNotif($('#push-notif').data('host'), $('#push-notif').data('topic'));
   });
 
 }).call(this);

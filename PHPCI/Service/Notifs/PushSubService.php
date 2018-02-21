@@ -43,20 +43,9 @@ final class PushSubService
     $pushSvcHandler = 'onDataEntry';
     $pull->on('message', array($pushSvc, $pushSvcHandler));
 
-    //Set up our WebSocket server for clients 
-    //wanting real-time updates.
+    //Set up our WebSocket server for clients wanting real-time updates.
     $webSock = new Server($uri, $loop); 
-    $webServer = new IoServer
-    (
-      new HttpServer
-      (
-        new WsServer
-        (
-          new WampServer($pushSvc)
-        )
-      ),
-      $webSock
-    );
+    $webServer = new IoServer(new HttpServer(new WsServer(new WampServer($pushSvc))), $webSock);
     $loop->run();
   }
 }

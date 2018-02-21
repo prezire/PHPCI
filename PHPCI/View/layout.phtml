@@ -43,15 +43,10 @@
 </head>
 <body class="phpci <?php print !empty($skin) ? 'skin-' . $skin : 'skin-blue'; ?>">
 
-<!-- 
-    Push Notification. 
-    TODO: Use config.
--->
-<span id="notif">
-  <input type="hidden" class="host" value="ws://localhost:8080" />
-  <input type="hidden" class="topic" value="builds" />
-</span>
-<!-- /Push Notification. -->
+<input type="hidden" id="push-notif"
+    data-host="<?php echo config('phpci.notifs.uri'); ?>"
+    data-topic="<?php echo config('phpci.notifs.topic'); ?>" />
+<span id="count"></span>
 
 <div class="wrapper row-offcanvas row-offcanvas-left">
 
